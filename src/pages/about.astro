@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+
+const skills = [
+  { category: 'Frontend', items: ['React', 'Next.js', 'Vue.js', 'Astro', 'TypeScript', 'Tailwind CSS'] },
+  { category: 'Backend', items: ['Node.js', 'Python', 'Go', 'PostgreSQL', 'MongoDB', 'Redis'] },
+  { category: 'DevOps', items: ['Docker', 'AWS', 'CI/CD', 'Terraform', 'Linux', 'Nginx'] },
+  { category: 'Tools', items: ['Git', 'VS Code', 'Figma', 'Postman', 'Jira', 'Notion'] },
+];
+
+const timeline = [
+  {
+    year: '2025 — Present',
+    title: 'Freelance Software Developer',
+    description: 'Building custom web applications and providing technical consulting for startups and businesses worldwide.',
+  },
+  {
+    year: '2022 — 2025',
+    title: 'Senior Developer at TechCorp',
+    description: 'Led a team of 5 developers building a SaaS platform serving 50K+ users. Improved performance by 40%.',
+  },
+  {
+    year: '2020 — 2022',
+    title: 'Full-Stack Developer at WebStudio',
+    description: 'Developed e-commerce and content management solutions for clients across various industries.',
+  },
+  {
+    year: '2018 — 2020',
+    title: 'Junior Developer at DevAgency',
+    description: 'Started my career building responsive websites and learning modern development practices.',
+  },
+];
+---
+
+<BaseLayout title="About" description="Learn more about my background, skills, and experience as a software developer." schemaType="Person">
+  <!-- Hero -->
+  <section class="py-16 sm:py-20">
+    <Container>
+      <div class="lg:grid lg:grid-cols-[300px_1fr] lg:gap-16 lg:items-start">
+        <div class="mb-10 lg:mb-0">
+          <div class="aspect-square overflow-hidden rounded-2xl bg-gradient-to-br from-primary-100 to-indigo-100 dark:from-primary-900/30 dark:to-indigo-900/30">
+            <div class="flex h-full items-center justify-center text-6xl font-bold text-primary-300 dark:text-primary-700">
+              M
+            </div>
+          </div>
+        </div>
+        <div>
+          <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+            About Me
+          </h1>
+          <div class="mt-6 space-y-4 text-lg text-slate-600 dark:text-slate-400">
+            <p>
+              I'm Mohammed, a freelance software developer with a passion for building elegant,
+              high-performance web applications. With over 6 years of experience in the industry,
+              I've worked with startups and established businesses to bring their digital visions to
+              life.
+            </p>
+            <p>
+              I specialize in full-stack development using modern technologies like React, Node.js,
+              and cloud platforms. I believe in writing clean, maintainable code and following best
+              practices that stand the test of time.
+            </p>
+            <p>
+              When I'm not coding, you'll find me contributing to open source, writing about
+              technology, or exploring new tools and frameworks to stay ahead of the curve.
+            </p>
+          </div>
+          <div class="mt-8">
+            <Button href="/contact">Get in Touch</Button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Skills -->
+  <section class="bg-slate-50 py-16 dark:bg-slate-900/50 sm:py-20">
+    <Container>
+      <h2 class="mb-12 text-center text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+        Skills & Technologies
+      </h2>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          skills.map((group) => (
+            <div>
+              <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-900 dark:text-white">
+                {group.category}
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                {group.items.map((skill) => (
+                  <Badge>{skill}</Badge>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <!-- Experience Timeline -->
+  <section class="py-16 sm:py-20">
+    <Container>
+      <h2 class="mb-12 text-center text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+        Experience
+      </h2>
+      <div class="mx-auto max-w-2xl">
+        <div class="space-y-8">
+          {
+            timeline.map((item, i) => (
+              <div class="relative pl-8 before:absolute before:left-0 before:top-0 before:h-full before:w-px before:bg-slate-200 dark:before:bg-slate-800">
+                <div class="absolute left-0 top-1 -translate-x-1/2">
+                  <div class="h-3 w-3 rounded-full border-2 border-primary-500 bg-white dark:bg-slate-950" />
+                </div>
+                <p class="text-sm font-medium text-primary-600 dark:text-primary-400">{item.year}</p>
+                <h3 class="mt-1 text-lg font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                <p class="mt-2 text-slate-600 dark:text-slate-400">{item.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Values -->
+  <section class="bg-slate-50 py-16 dark:bg-slate-900/50 sm:py-20">
+    <Container>
+      <h2 class="mb-12 text-center text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+        How I Work
+      </h2>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          [
+            { title: 'Clear Communication', description: 'Regular updates, transparent timelines, and honest conversations about challenges.' },
+            { title: 'Quality First', description: 'Clean, tested, and well-documented code that\'s built to last and easy to maintain.' },
+            { title: 'User-Centered', description: 'Every technical decision is guided by the impact it has on the end user experience.' },
+            { title: 'Agile Approach', description: 'Iterative development with frequent demos so you see progress and can give feedback early.' },
+            { title: 'Security Minded', description: 'Security best practices baked into every layer, from authentication to data handling.' },
+            { title: 'Continuous Learning', description: 'Always staying current with the latest tools, patterns, and industry best practices.' },
+          ].map((value) => (
+            <div class="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+              <h3 class="mb-2 text-lg font-semibold text-slate-900 dark:text-white">{value.title}</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400">{value.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 sm:py-20">
+    <Container>
+      <div class="text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          Let's Build Something Together
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+          I'm always excited to take on new challenges and help bring great ideas to life.
+        </p>
+        <div class="mt-8">
+          <Button href="/contact" size="lg">Start a Conversation</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

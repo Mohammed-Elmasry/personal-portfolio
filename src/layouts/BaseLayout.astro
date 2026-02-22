@@ -1,0 +1,52 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import SEOHead from '../components/seo/SEOHead.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+  schemaType?: 'WebSite' | 'Person' | 'Article' | 'CreativeWork';
+  schemaData?: Record<string, unknown>;
+}
+
+const { title, description, ogImage, ogType, noindex, schemaType = 'WebSite', schemaData } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <SEOHead {title} {description} {ogImage} {ogType} {noindex} />
+    <SchemaOrg type={schemaType} data={schemaData} />
+    <ViewTransitions />
+
+    <!-- Anti-FOUC theme script -->
+    <script is:inline>
+      (function () {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+
+    <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

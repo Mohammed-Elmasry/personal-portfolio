@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Badge from '../components/ui/Badge.astro';
+import ContactForm from '../components/contact/ContactForm.astro';
+import SchedulingSection from '../components/contact/SchedulingSection.astro';
+import { siteConfig } from '../data/siteConfig';
+---
+
+<BaseLayout title="Contact" description="Get in touch to discuss your project or schedule a free consultation.">
+  <section class="py-16 sm:py-20">
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          Get in Touch
+        </h1>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+          Have a project in mind? I'd love to hear about it. Send me a message or schedule a call.
+        </p>
+        {
+          siteConfig.availability && (
+            <div class="mt-4">
+              <Badge variant="success" class="inline-flex items-center gap-1.5">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                {siteConfig.availabilityText}
+              </Badge>
+            </div>
+          )
+        }
+      </div>
+
+      <div class="mx-auto mt-12 max-w-3xl">
+        <div class="grid gap-12 lg:grid-cols-[1fr_300px]">
+          <div>
+            <h2 class="mb-6 text-xl font-semibold text-slate-900 dark:text-white">
+              Send a Message
+            </h2>
+            <ContactForm />
+          </div>
+
+          <div class="space-y-6">
+            <SchedulingSection />
+
+            <div class="rounded-xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+              <h3 class="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
+                Direct Contact
+              </h3>
+              <div class="space-y-3 text-sm">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  class="flex items-center gap-3 text-slate-600 transition-colors hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400"
+                >
+                  <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                  {siteConfig.email}
+                </a>
+                <div class="flex items-center gap-3 text-slate-600 dark:text-slate-400">
+                  <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 0115 0z" />
+                  </svg>
+                  {siteConfig.location}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+import { siteConfig } from '../../data/siteConfig';
+
+interface Props {
+  type?: 'WebSite' | 'Person' | 'Article' | 'CreativeWork';
+  data?: Record<string, unknown>;
+}
+
+const { type = 'WebSite', data = {} } = Astro.props;
+
+const baseSchema = {
+  '@context': 'https://schema.org',
+};
+
+const schemas: Record<string, Record<string, unknown>> = {
+  WebSite: {
+    ...baseSchema,
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+  },
+  Person: {
+    ...baseSchema,
+    '@type': 'Person',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    email: siteConfig.email,
+    jobTitle: 'Software Developer',
+  },
+  Article: {
+    ...baseSchema,
+    '@type': 'Article',
+    author: {
+      '@type': 'Person',
+      name: siteConfig.name,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: siteConfig.name,
+    },
+    ...data,
+  },
+  CreativeWork: {
+    ...baseSchema,
+    '@type': 'CreativeWork',
+    author: {
+      '@type': 'Person',
+      name: siteConfig.name,
+    },
+    ...data,
+  },
+};
+
+const schema = { ...schemas[type], ...data };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import ServicesGrid from '../components/home/ServicesGrid.astro';
+import FeaturedProjects from '../components/home/FeaturedProjects.astro';
+import Testimonials from '../components/home/Testimonials.astro';
+import LatestPosts from '../components/home/LatestPosts.astro';
+import CTASection from '../components/home/CTASection.astro';
+---
+
+<BaseLayout schemaType="Person">
+  <Hero />
+  <ServicesGrid />
+  <FeaturedProjects />
+  <Testimonials />
+  <LatestPosts />
+  <CTASection />
+</BaseLayout>

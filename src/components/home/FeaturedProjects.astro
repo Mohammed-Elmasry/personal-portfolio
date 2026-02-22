@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+
+const projects = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+  .slice(0, 3);
+---
+
+<section class="bg-slate-50 py-20 dark:bg-slate-900/50">
+  <Container>
+    <SectionHeading title="Featured Projects" subtitle="A selection of work I'm most proud of" />
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {
+        projects.map((project) => (
+          <a
+            href={`/projects/${project.id}`}
+            class="group overflow-hidden rounded-xl border border-slate-200 bg-white transition-all hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:shadow-slate-800/30"
+          >
+            <div class="aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+              {project.data.heroImage ? (
+                <img
+                  src={project.data.heroImage}
+                  alt={project.data.title}
+                  class="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="flex h-full items-center justify-center text-slate-400 dark:text-slate-600">
+                  <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v13.5a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                </div>
+              )}
+            </div>
+            <div class="p-5">
+              <h3 class="mb-2 text-lg font-semibold text-slate-900 group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400">
+                {project.data.title}
+              </h3>
+              <p class="mb-4 text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                {project.data.description}
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                {project.data.tech.slice(0, 4).map((t) => (
+                  <Badge>{t}</Badge>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    {
+      projects.length > 0 && (
+        <div class="mt-12 text-center">
+          <Button href="/projects" variant="outline">View All Projects</Button>
+        </div>
+      )
+    }
+  </Container>
+</section>

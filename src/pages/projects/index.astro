@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.sortOrder - b.data.sortOrder,
+);
+---
+
+<BaseLayout title="Projects" description="A showcase of my recent work and side projects.">
+  <section class="py-16 sm:py-20">
+    <Container>
+      <SectionHeading
+        title="Projects"
+        subtitle="A showcase of my recent work and side projects"
+      />
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          projects.map((project) => (
+            <ProjectCard
+              id={project.id}
+              title={project.data.title}
+              description={project.data.description}
+              heroImage={project.data.heroImage}
+              tech={project.data.tech}
+            />
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

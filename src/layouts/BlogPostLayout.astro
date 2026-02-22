@@ -1,0 +1,87 @@
+---
+import type { MarkdownHeading } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import TableOfContents from '../components/blog/TableOfContents.astro';
+import Badge from '../components/ui/Badge.astro';
+import { formatDate } from '../utils/formatDate';
+import { getReadingTime } from '../utils/readingTime';
+import { siteConfig } from '../data/siteConfig';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags: string[];
+  headings: MarkdownHeading[];
+  body: string;
+}
+
+const { title, description, pubDate, updatedDate, tags, headings, body } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  schemaType="Article"
+  schemaData={{
+    headline: title,
+    description,
+    datePublished: pubDate.toISOString(),
+    dateModified: (updatedDate || pubDate).toISOString(),
+  }}
+>
+  <section class="py-16 sm:py-20">
+    <Container>
+      <a
+        href="/blog"
+        class="mb-8 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Back to Blog
+      </a>
+
+      <div class="lg:grid lg:grid-cols-[1fr_250px] lg:gap-12">
+        <article>
+          <header class="mb-10">
+            <div class="flex flex-wrap items-center gap-3 text-sm text-slate-500 dark:text-slate-500">
+              <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+              <span>&middot;</span>
+              <span>{getReadingTime(body)}</span>
+            </div>
+            <h1
+              class="mt-4 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl"
+            >
+              {title}
+            </h1>
+            <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">{description}</p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              {tags.map((tag) => <Badge variant="primary">{tag}</Badge>)}
+            </div>
+            {
+              updatedDate && (
+                <p class="mt-4 text-sm italic text-slate-500 dark:text-slate-500">
+                  Updated on {formatDate(updatedDate)}
+                </p>
+              )
+            }
+          </header>
+
+          <div class="prose prose-slate max-w-none dark:prose-invert prose-headings:scroll-mt-20 prose-headings:font-semibold prose-a:text-primary-600 dark:prose-a:text-primary-400">
+            <slot />
+          </div>
+        </article>
+
+        <aside class="hidden lg:block">
+          <div class="sticky top-24">
+            <TableOfContents headings={headings} />
+          </div>
+        </aside>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
