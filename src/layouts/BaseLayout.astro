@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import SEOHead from '../components/seo/SEOHead.astro';
 import SchemaOrg from '../components/seo/SchemaOrg.astro';
 import Header from '../components/global/Header.astro';
@@ -25,17 +25,21 @@ const { title, description, ogImage, ogType, noindex, schemaType = 'WebSite', sc
   <head>
     <SEOHead {title} {description} {ogImage} {ogType} {noindex} />
     <SchemaOrg type={schemaType} data={schemaData} />
-    <ViewTransitions />
+    <ClientRouter />
 
-    <!-- Anti-FOUC theme script -->
+    <!-- Anti-FOUC theme script (also re-applies after View Transition swaps) -->
     <script is:inline>
       (function () {
-        const theme = localStorage.getItem('theme');
-        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
+        function applyTheme() {
+          const theme = localStorage.getItem('theme');
+          if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
         }
+        applyTheme();
+        document.addEventListener('astro:after-swap', applyTheme);
       })();
     </script>
 
