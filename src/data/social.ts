@@ -12,5 +12,5 @@ export const socialLinks: SocialLink[] = [
     icon: 'linkedin',
   },
   { label: 'YouTube', href: 'https://www.youtube.com/@CodeBuster1994', icon: 'youtube' },
-  { label: 'Email', href: 'mailto:hello@mohammedalmasry.com', icon: 'mail' },
+  { label: 'Email', href: 'mailto:mohammed.hussein.mahmoud@gmail.com', icon: 'mail' },
 ];

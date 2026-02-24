@@ -5,7 +5,7 @@ export const siteConfig = {
     'Full-stack software developer specializing in modern web applications. Available for freelance projects.',
   url: 'https://mohammedalmasry.com',
   ogImage: '/og-default.png',
-  email: 'hello@mohammedalmasry.com',
+  email: 'mohammed.hussein.mahmoud@gmail.com',
   location: 'Remote',
   availability: true,
   availabilityText: 'Available for new projects',
