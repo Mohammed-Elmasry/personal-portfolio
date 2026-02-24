@@ -12,5 +12,5 @@ export const socialLinks: SocialLink[] = [
     icon: 'linkedin',
   },
   { label: 'Twitter', href: 'https://twitter.com/yourusername', icon: 'twitter' },
-  { label: 'Email', href: 'mailto:hello@mohammeddev.com', icon: 'mail' },
+  { label: 'Email', href: 'mailto:hello@mohammedalmasry.com', icon: 'mail' },
 ];

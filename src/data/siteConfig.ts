@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: 'Mohammed',
-  title: 'Mohammed — Freelance Software Developer',
+  name: 'Mohammed Almasry',
+  title: 'Mohammed Almasry — Freelance Software Developer',
   description:
     'Full-stack software developer specializing in modern web applications. Available for freelance projects.',
-  url: 'https://mohammeddev.com',
+  url: 'https://mohammedalmasry.com',
   ogImage: '/og-default.png',
-  email: 'hello@mohammeddev.com',
+  email: 'hello@mohammedalmasry.com',
   location: 'Remote',
   availability: true,
   availabilityText: 'Available for new projects',
