@@ -1,0 +1,107 @@
+---
+title: Why Test-driven Development is not enough
+description: >-
+  This blog exposes some holes in the TDD practice when it comes to discovering
+  bugs, ensuring business delivery, and boosting the overall maintainability of
+  the project 
+pubDate: 2026-02-25
+tags:
+  - TDD
+  - XP
+  - Clean Code
+  - Clean Architecture
+draft: false
+---
+Since we’re moving to **Java**, the stakes are higher. In the Java ecosystem (Spring Boot, Jakarta EE, etc.), we often fall into the trap of "Mock-Driven Development," where we spend more time configuring Mockito than writing actual logic.
+
+Here is the revised, punchy Java-focused version of your blog.
+
+---
+
+# Why TDD is Not Enough: The 2 AM Reality Check (Java Edition)
+
+We’ve all been there. Your JUnit suite is a sea of green checkmarks. Your Jacoco report shows a staggering 98% code coverage. You’ve followed the Red-Green-Refactor cycle religiously.
+
+Yet, at 2 AM, the pager goes off. The production system is throwing `Internal Server Error` because of a database constraint violation or a microservice timeout.
+
+The hard truth? **TDD is a design tool, not a safety net.** It helps you write clean, decoupled logic, but it leaves massive gaps in how your software survives the real world.
+
+---
+
+## 1. The Mocking Trap (Mockito is Lying to You)
+
+In Java, we love to mock. To isolate a service, we mock the `Repository` or the `ExternalApiClient`. The problem is that **mocks are assumptions.** They represent how you *think* a dependency works, not how it actually behaves.
+
+### The TDD "Success" (That fails in production):
+
+Java
+
+```
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
+
+    @Mock
+    private UserRepository userRepository;
+
+    @Test
+    void testGetUserEmail_Success() {
+        // We are telling the mock exactly what to do
+        when(userRepository.findById(1L))
+            .thenReturn(Optional.of(new User(1L, "dev@example.com")));
+
+        String email = userService.getUserEmail(1L);
+
+        assertEquals("dev@example.com", email); // Green!
+    }
+}
+
+```
+
+**The Reality Check:** In production, the database doesn't just "return a User object." It times out, it throws a `QueryTimeoutException`, or the column name changed in a Liquibase script that your unit test never ran. TDD won't catch a misconfigured Hibernate mapping.
+
+---
+
+## 2. The "Happy Path" Tunnel Vision
+
+TDD excels at "if I give X, I get Y." But it rarely accounts for the **infinite ways things can go wrong.** We tend to write tests for the scenarios we've already imagined.
+
+### The Practical Gap: Property-Based Testing
+
+Instead of picking three manual test cases, Java developers should look at **jqwik**. It hammers your code with hundreds of random, edge-case inputs to find where your logic actually snaps.
+
+Java
+
+```
+@Property
+void testDiscountCalculation(@ForAll @Positive double price) {
+    // This will find the precision errors, the Overflow errors, 
+    // and the NaN cases that your manual TDD tests missed.
+    double total = discountService.applyDiscount(price, "SAVE10");
+    assertTrue(total <= price);
+}
+
+```
+
+---
+
+## 3. Systems Fail at the Boundaries
+
+Modern Java applications aren't monoliths; they are webs of dependencies. A unit test cannot tell you that Service A is sending a JSON date format that Service B’s `Jackson` configuration no longer accepts.
+
+For this, you need **Contract Testing** (like PACT) or **Integration Tests** that hit real infrastructure.
+
+---
+
+## Beyond TDD: The "Defense in Depth" Strategy
+
+If TDD is the floor, here is the rest of your building:
+
+1. **Stop Mocking Databases:** Use **Testcontainers**. It spins up a real Docker instance of Postgres or MySQL for your tests. If your SQL query is invalid, the test fails—as it should.
+1. **Observability over Assertions:** In production, you can't `assertEquals`. You need Micrometer metrics and OpenTelemetry traces. If a function fails, do you have enough telemetry to know *why* without a debugger?
+1. **Resilience Patterns:** Use **Resilience4j**. TDD won't help you when a 3rd-party API takes 10 seconds to respond. You need Circuit Breakers and Retries.
+
+---
+
+## Final Thought
+
+Don't stop doing TDD. It’s excellent for keeping your internal business logic sane. But stop pretending it’s a guarantee of quality. A green test suite means your code works *in your head*. To make it work in the world, you have to look outside the unit.
