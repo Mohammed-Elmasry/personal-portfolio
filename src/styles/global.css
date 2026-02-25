@@ -59,6 +59,15 @@ body {
   --tw-prose-td-borders: theme('--color-slate-700');
 }
 
+/* Cursor spotlight effect (dark mode only) */
+#spotlight {
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(120, 119, 198, 0.08),
+    transparent 40%
+  );
+}
+
 /* Skip to content link */
 .skip-to-content {
   @apply absolute -top-full left-4 z-50 rounded-b-lg bg-primary-600 px-4 py-2 text-white transition-all focus:top-0;
