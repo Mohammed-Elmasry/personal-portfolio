@@ -18,7 +18,7 @@ export default config({
       entryLayout: 'content',
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
-        description: fields.text({ label: 'Description', multiline: true }),
+        description: fields.text({ label: 'Description', multiline: true, validation: { isRequired: true } }),
         pubDate: fields.date({ label: 'Publication Date', validation: { isRequired: true } }),
         updatedDate: fields.date({ label: 'Updated Date' }),
         heroImage: fields.text({ label: 'Hero Image URL' }),
@@ -38,7 +38,7 @@ export default config({
       entryLayout: 'content',
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
-        description: fields.text({ label: 'Description', multiline: true }),
+        description: fields.text({ label: 'Description', multiline: true, validation: { isRequired: true } }),
         heroImage: fields.text({ label: 'Hero Image URL' }),
         tech: fields.array(fields.text({ label: 'Technology' }), {
           label: 'Tech Stack',
