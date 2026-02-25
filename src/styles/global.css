@@ -62,8 +62,8 @@ body {
 /* Cursor spotlight effect (dark mode only) */
 #spotlight {
   background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(120, 119, 198, 0.08),
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(120, 119, 198, 0.15),
     transparent 40%
   );
 }

@@ -5,32 +5,31 @@ import Button from '../components/ui/Button.astro';
 import Badge from '../components/ui/Badge.astro';
 
 const skills = [
-  { category: 'Frontend', items: ['React', 'Next.js', 'Vue.js', 'Astro', 'TypeScript', 'Tailwind CSS'] },
-  { category: 'Backend', items: ['Node.js', 'Python', 'Go', 'PostgreSQL', 'MongoDB', 'Redis'] },
-  { category: 'DevOps', items: ['Docker', 'AWS', 'CI/CD', 'Terraform', 'Linux', 'Nginx'] },
-  { category: 'Tools', items: ['Git', 'VS Code', 'Figma', 'Postman', 'Jira', 'Notion'] },
+  { category: 'Backend', items: ['Java', 'Spring Boot', 'Spring Security', 'Spring Data & JPA', 'Hibernate', 'Go', 'C# / .NET'] },
+  { category: 'Frontend & Data', items: ['JavaScript', 'TypeScript', 'React', 'MySQL', 'PostgreSQL', 'MongoDB', 'Redis'] },
+  { category: 'DevOps & Cloud', items: ['AWS', 'Docker', 'Nginx', 'Jenkins', 'GitHub Actions', 'Maven', 'Kafka', 'RabbitMQ'] },
 ];
 
 const timeline = [
   {
-    year: '2025 — Present',
-    title: 'Freelance Software Developer',
-    description: 'Building custom web applications and providing technical consulting for startups and businesses worldwide.',
+    year: '2024 — Present',
+    title: 'Senior Software Engineer — Talabat',
+    description: 'Redesigned the Payment Gateway service using C#, .NET, and Go, reducing processing latency by 25%. Designed a payment screening system handling 1000+ transactions per second with near real-time performance.',
   },
   {
-    year: '2022 — 2025',
-    title: 'Senior Developer at TechCorp',
-    description: 'Led a team of 5 developers building a SaaS platform serving 50K+ users. Improved performance by 40%.',
+    year: '2023 — 2024',
+    title: 'Senior Software Engineer — Foodics',
+    description: 'Improved importing performance by 400% using Apache Spark, Spring Boot, and PostgreSQL. Coached developers on TDD and Extreme Programming, improving delivery time by 20%.',
   },
   {
-    year: '2020 — 2022',
-    title: 'Full-Stack Developer at WebStudio',
-    description: 'Developed e-commerce and content management solutions for clients across various industries.',
+    year: '2019 — 2023',
+    title: 'Mid-Senior Software Developer — IAMProperty',
+    description: 'Transformed a PHP monolith to Java Spring microservices, reducing cloud infrastructure costs by 40%. Implemented CI/CD pipelines cutting release time by 50%.',
   },
   {
-    year: '2018 — 2020',
-    title: 'Junior Developer at DevAgency',
-    description: 'Started my career building responsive websites and learning modern development practices.',
+    year: '2015 — 2018',
+    title: 'Junior Full-Stack Web Developer — ICS Global',
+    description: 'Maintained the core ERP system using Java, Spring Boot, and MySQL. Developed taxation, accounting, and CRM modules. Built the Andalusia Clinics internal platform, reducing visitation duration from 23 to 16 minutes.',
   },
 ];
 ---
@@ -41,10 +40,8 @@ const timeline = [
     <Container>
       <div class="lg:grid lg:grid-cols-[300px_1fr] lg:gap-16 lg:items-start">
         <div class="mb-10 lg:mb-0">
-          <div class="aspect-square overflow-hidden rounded-2xl bg-gradient-to-br from-primary-100 to-indigo-100 dark:from-primary-900/30 dark:to-indigo-900/30">
-            <div class="flex h-full items-center justify-center text-6xl font-bold text-primary-300 dark:text-primary-700">
-              M
-            </div>
+          <div class="aspect-square overflow-hidden rounded-2xl">
+            <img src="/images/avatar.jpeg" alt="Mohammed Almasry" class="h-full w-full object-cover" />
           </div>
         </div>
         <div>
@@ -53,19 +50,20 @@ const timeline = [
           </h1>
           <div class="mt-6 space-y-4 text-lg text-slate-600 dark:text-slate-400">
             <p>
-              I'm Mohammed, a freelance software developer with a passion for building elegant,
-              high-performance web applications. With over 6 years of experience in the industry,
-              I've worked with startups and established businesses to bring their digital visions to
-              life.
+              I'm Mohammed, a senior software engineer with over 10 years of experience building
+              high-performance, scalable systems. I've worked across fintech, proptech, and enterprise
+              SaaS — from payment gateways processing thousands of transactions per second to
+              microservices architectures serving global markets.
             </p>
             <p>
-              I specialize in full-stack development using modern technologies like React, Node.js,
-              and cloud platforms. I believe in writing clean, maintainable code and following best
-              practices that stand the test of time.
+              I specialize in Java, Spring ecosystem, Go, and cloud-native solutions on AWS.
+              I'm an AWS Certified Solutions Architect and a strong advocate for Domain-Driven Design,
+              Test-Driven Development, and clean architecture.
             </p>
             <p>
-              When I'm not coding, you'll find me contributing to open source, writing about
-              technology, or exploring new tools and frameworks to stay ahead of the curve.
+              Beyond code, I've led technical workshops, coached junior and mid-level developers,
+              and built open-source tools like Spring-Hex to improve developer experience across
+              the Spring ecosystem.
             </p>
           </div>
           <div class="mt-8">
@@ -82,7 +80,7 @@ const timeline = [
       <h2 class="mb-12 text-center text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
         Skills & Technologies
       </h2>
-      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {
           skills.map((group) => (
             <div>

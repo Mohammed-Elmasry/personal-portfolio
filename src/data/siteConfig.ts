@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: 'Mohammed Almasry',
-  title: 'Mohammed Almasry — Freelance Software Developer',
+  title: 'Mohammed Almasry — Senior Software Engineer',
   description:
-    'Full-stack software developer specializing in modern web applications. Available for freelance projects.',
+    'Senior software engineer with 10+ years of experience specializing in Java, Spring, Go, and cloud-native solutions. AWS Certified Solutions Architect.',
   url: 'https://mohammedalmasry.com',
   ogImage: '/og-default.png',
   email: 'mohammed.hussein.mahmoud@gmail.com',
